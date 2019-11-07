@@ -8,9 +8,8 @@ resource "random_string" "postfix" {
 }
 
 resource "google_compute_instance" "primary" {
-  # The number of primaries must be hard coded to 3 when Internal Production Mode
-  # is selected. Currently, that mode does not support scaling.
-  count = 3
+  # If primary_count is not specified, create 3 primary instances.  Currently, that mode does not support scaling.
+  count = "${var.primary_count} != "" ? var.primary_count : 3 }"
 
   name         = "${var.prefix}-primary-${count.index}-${random_string.postfix.result}"
   machine_type = "${var.primary_machine_type}"
