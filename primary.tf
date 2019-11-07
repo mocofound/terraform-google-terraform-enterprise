@@ -9,7 +9,7 @@ resource "random_string" "postfix" {
 
 resource "google_compute_instance" "primary" {
   # If primary_count is not specified, create 3 primary instances.  Currently, that mode does not support scaling.
-  count = "${var.primary_count != "" ? var.primary_count : 3 }"
+  count = "${var.primary_count} != "" ? ${var.primary_count} : 3"
   name         = "${var.prefix}-primary-${count.index}-${random_string.postfix.result}"
   machine_type = "${var.primary_machine_type}"
   zone         = "${var.zone}"
