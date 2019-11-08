@@ -27,7 +27,7 @@ module "instance-template" {
   postgresql_database     = "${var.postgresql_database}"
   postgresql_extra_params = "${var.postgresql_extra_params}"
   gcs_credentials         = "${var.gcs_credentials}"
-  credentials_file        = "${var.credentials_file}"
+  credentials_file        = "${base64encode("${var.credentials_file}")}"
   project                 = "${var.project}"
   gcs_project             = "${var.gcs_project}"
   gcs_bucket              = "${var.gcs_bucket}"
