@@ -46,7 +46,7 @@ resource "google_compute_instance" "primary" {
     role-id              = "${count.index}"
     ptfe-install-url     = "${var.ptfe_install_url}"
     jq-url               = "${var.jq_url}"
-    b64-license          = "${base64encode(file("${var.license_file}"))}"
+    b64-license          = "${var.license_file}"
     http_proxy_url       = "${var.http_proxy_url}"
     airgap-package-url   = "${var.airgap_package_url}"
     airgap-installer-url = "${var.airgap_package_url == "none" ? "none" : count.index == 0 ? var.airgap_installer_url : local.internal_airgap_url}"
