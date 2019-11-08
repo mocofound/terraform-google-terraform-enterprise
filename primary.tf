@@ -9,7 +9,8 @@ resource "random_string" "postfix" {
 
 resource "google_compute_instance" "primary" {
   #Currently, that mode does not support scaling.
-  count = ${var.primary_count}
+  #count = "${tonumber(var.primary_count)}"
+  count = "${var.primary_count}"
   
   name         = "${var.prefix}-primary-${count.index}-${random_string.postfix.result}"
   machine_type = "${var.primary_machine_type}"
